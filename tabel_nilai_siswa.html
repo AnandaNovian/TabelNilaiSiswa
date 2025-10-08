@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <title>Tabel Nilai Siswa</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+    }
+    table {
+      border-collapse: collapse;
+      width: 60%;
+    }
+    th, td {
+      border: 1px solid black;
+      padding: 8px;
+      text-align: center;
+    }
+    th {
+      background-color: #f2f2f2;
+    }
+    .lulus {
+      background-color: #c8e6c9; /* hijau muda */
+    }
+    .gagal {
+      background-color: #ffcdd2; /* merah muda */
+    }
+  </style>
+</head>
+<body>
+  <h2>TABEL NILAI SISWA</h2>
+  <table id="tabelNilai">
+    <thead>
+      <tr>
+        <th>No</th>
+        <th>Nama Siswa</th>
+        <th>Tugas</th>
+        <th>UTS</th>
+        <th>UAS</th>
+        <th>NA</th>
+      </tr>
+    </thead>
+    <tbody>
+      <!-- Data akan dimasukkan dengan JavaScript -->
+    </tbody>
+  </table>
+
+  <script>
+    // Data siswa
+    let siswa = [
+      { nama: "Asep", tugas: 80, uts: 95, uas: 85 },
+      { nama: "Iwan", tugas: 75, uts: 75, uas: 90 },
+      { nama: "Cepi", tugas: 70, uts: 80, uas: 90 },
+      { nama: "Agus", tugas: 65, uts: 40, uas: 50 },
+      { nama: "Dadang", tugas: 60, uts: 70, uas: 60 }
+    ];
+
+    // Fungsi hitung nilai akhir
+    function hitungNA(tugas, uts, uas) {
+      return (0.4 * tugas) + (0.3 * uts) + (0.3 * uas);
+    }
+
+    // Ambil tbody tabel
+    let tbody = document.querySelector("#tabelNilai tbody");
+
+    // Loop untuk isi data
+    siswa.forEach((mhs, i) => {
+      let na = hitungNA(mhs.tugas, mhs.uts, mhs.uas);
+      let kelas = na >= 70 ? 'lulus' : 'gagal';
+
+      let row = `
+        <tr class="${kelas}">
+          <td>${i+1}</td>
+          <td>${mhs.nama}</td>
+          <td>${mhs.tugas}</td>
+          <td>${mhs.uts}</td>
+          <td>${mhs.uas}</td>
+          <td>${na.toFixed(1)}</td>
+        </tr>
+      `;
+      tbody.innerHTML += row;
+    });
+  </script>
+</body>
+</html>
